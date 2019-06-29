@@ -44,7 +44,8 @@ function reset() {
     guessesRemaining = 9;
     wrongLetters = [];
     lettersAndBlanks = [];
-    Game()
+    Game();
+    
 
 }
 
@@ -82,11 +83,16 @@ function checkLetters(letter) {
 function complete() {
 
     if (wordLetters.toString() == lettersAndBlanks.toString()) {
+        
+        
+        document.getElementById("end-game").innerHTML = "You Win!";
         reset()
     }
 
 
     else if (guessesRemaining === 0) {
+
+        document.getElementById("end-game").innerHTML = "You Lose! Try Again!";
 
         reset()
     }
@@ -106,7 +112,9 @@ function complete() {
 Game()
 
 document.onkeyup = function (event) {
-    var guesses = String.fromCharCode(event.keyCode).toLowerCase()
+    var guesses = String.fromCharCode(event.keyCode).toLowerCase();
+
+    document.getElementById("end-game").innerHTML = " ";
 
     checkLetters(guesses);
 
