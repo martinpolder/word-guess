@@ -1,10 +1,10 @@
 
 // Array for all possible correct words
-var wordBank = ["piss", "flowers"];
+var wordBank = ["piss", "flowers"]
 
 
 // variables
-var randomWord = " ";
+var randomWord = "";
 var wordLetters = [];
 var blanks = 0;
 var lettersAndBlanks = [];
@@ -14,7 +14,7 @@ var guessesRemaining = 9;
 
 function Game() {
     // CPU randomly chooses word from the bank for the user to solve 
-    var randomWord = wordBank[Math.floor(Math.random() * wordBank.length)];
+    randomWord = wordBank[Math.floor(Math.random() * wordBank.length)];
 
     // this splits the randomly chosen word into seperate arrays by letter and put into a new array
     wordLetters = randomWord.split("");
@@ -27,6 +27,8 @@ function Game() {
         lettersAndBlanks.push("_");
 
     }
+
+    document.getElementById("currentword").innerHTML = " " + lettersAndBlanks.join("  ");
 
     // testing
     // console.log(randomWord);
@@ -47,42 +49,37 @@ function reset() {
 }
 
 
-// check to see if the guess matches the random word
 function checkLetters(letter) {
-    
-    var wordLetters = false;
-    // if the randomword we generated is equal to the guess
+    var letterInWord = false;
+    //if the generated randomword is equal to the letter entered... then variable is true
     for (var i = 0; i < blanks; i++) {
-        if (randomWord[i] == letter) {
-            wordLetters = true;
+        if (randomWord[i] === letter) {
+            letterInWord = true;
         }
     }
-    
-
-
-
-if (wordLetters) {
-    // checks each letter to see if it matches the word
-    for (var i = 0; i < blanks; i++) {
-        if (randomWord[i] == letter) {
-            lettersAndBlanks[i] = letter;
+    //if letterInWord (false)
+    if (letterInWord) {
+        //check each letter to see if it matches word
+        for (var i = 0; i < blanks; i++) {
+            if (randomWord[i] === letter) {
+                lettersAndBlanks[i] = letter;
+            }
         }
     }
+    //otherwise, push the incorrect guess in the wrong guesses section, and reduce remaining guesses
+    else {
+        wrongLetters.push(letter);
+        guessesRemaining--;
     }
-
-else {
-    wrongLetters.push(letter);
-    guessesRemaining--;
+    
 }
 
-
-}
 
 
 
 // check to see if the player won
 
-function complete () {
+function complete() {
 
     if (wordLetters.toString() == lettersAndBlanks.toString()) {
         reset()
@@ -93,15 +90,20 @@ function complete () {
 
         reset()
     }
-// test log
-    console.log(" " + lettersAndBlanks.join(" "));
-    console.log(" " + guessesRemaining);
+
+
+    document.getElementById("currentword").innerHTML = " " + lettersAndBlanks.join(" ");
+    document.getElementById("guessesremaining").innerHTML = " " + guessesRemaining;
+
+    // test log
+    // console.log(" " + lettersAndBlanks.join(" "));
+    // console.log(" " + guessesRemaining);
 
 }
 
 
 
-Game ()
+Game()
 
 document.onkeyup = function (event) {
     var guesses = String.fromCharCode(event.keyCode).toLowerCase()
@@ -110,7 +112,13 @@ document.onkeyup = function (event) {
 
     complete();
 
-    console.log(guesses);
+    // console.log(guesses);
 
-    console.log(" " + wrongLetters.join(" "));
+    // console.log(" " + wrongLetters.join(" "))
+
+
+    document.getElementById("playerguesses").innerHTML = "  " + wrongLetters.join("  ");
+
+
+
 }
