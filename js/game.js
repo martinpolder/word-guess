@@ -1,6 +1,6 @@
 
 // Array for all possible correct words
-var wordBank = ["piss", "flowers"]
+var wordBank = ["salah", "firmino", "mane", "henderson", "fabinho", "wijnaldum", "robertson", "alexanderarnold", "virgil", "lovren", "alisson"]
 
 
 // variables
@@ -84,20 +84,28 @@ function complete() {
 
     if (wordLetters.toString() == lettersAndBlanks.toString()) {
         
+      
+        document.getElementById("end-game").innerHTML = lettersAndBlanks.join(" ") + " You Win!";
         
-        document.getElementById("end-game").innerHTML = "You Win!";
-        reset()
+
+        reset();
+        
+       
+  
     }
 
 
     else if (guessesRemaining === 0) {
 
-        document.getElementById("end-game").innerHTML = "You Lose! Try Again!";
+        document.getElementById("end-game").innerHTML = "You Lose! Try again!";
 
-        reset()
+        reset();
+    
+        
+
     }
 
-
+   
     document.getElementById("currentword").innerHTML = " " + lettersAndBlanks.join(" ");
     document.getElementById("guessesremaining").innerHTML = " " + guessesRemaining;
 
@@ -112,6 +120,7 @@ function complete() {
 Game()
 
 document.onkeyup = function (event) {
+   
     var guesses = String.fromCharCode(event.keyCode).toLowerCase();
 
     document.getElementById("end-game").innerHTML = " ";
@@ -126,6 +135,8 @@ document.onkeyup = function (event) {
 
 
     document.getElementById("playerguesses").innerHTML = "  " + wrongLetters.join("  ");
+
+   
 
 
 
